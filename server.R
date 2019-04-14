@@ -663,7 +663,7 @@ shinyServer(function(input, output) {
 
           cat("\n")
 
-          # Colorimetric values for ColorCheker targets
+          # Colorimetric values for ColorCheker targets (default)
           # l1  <- c( 1, 115,  82,  68)
           # l2  <- c( 2, 194, 150, 130)
           # l3  <- c( 3,  98, 122, 157)
@@ -689,30 +689,57 @@ shinyServer(function(input, output) {
           # l23 <- c(23,  85,  85,  85)
           # l24 <- c(24,  52,  52,  52)
 
-          l1  <- c( 1, 115,  81,  67)
+          # Colorimetric values for ColorCheker targets (teddy bears)
+          # l1  <- c( 1, 115,  81,  67)
+          # l2  <- c( 2, 198, 148, 130)
+          # l3  <- c( 3,  89, 123, 157)
+          # l4  <- c( 4,  90, 109,  65)
+          # l5  <- c( 5, 128, 128, 177)
+          # l6  <- c( 6,  92, 190, 174)
+          # l7  <- c( 7, 221, 125,  48)
+          # l8  <- c( 8,  65,  92, 170)
+          # l9  <- c( 9, 195,  82,  97)
+          # l10 <- c(10,  92,  58, 106)
+          # l11 <- c(11, 158, 190,  65)
+          # l12 <- c(12, 228, 162,  39)
+          # l13 <- c(13,  34,  65, 147)
+          # l14 <- c(14,  67, 150,  73)
+          # l15 <- c(15, 178,  49,  58)
+          # l16 <- c(16, 237, 199,  22)
+          # l17 <- c(17, 191,  85, 151)
+          # l18 <- c(18,   4, 136, 169)
+          # l19 <- c(19, 244, 246, 244)
+          # l20 <- c(20, 198, 202, 202)
+          # l21 <- c(21, 159, 163, 163)
+          # l22 <- c(22, 120, 121, 123)
+          # l23 <- c(23,  81,  85,  86)
+          # l24 <- c(24,  48,  49,  51)
+
+          # Colorimetric values for ColorCheker targets (coral)
+          l1  <- c( 1, 115,  81,  69)
           l2  <- c( 2, 198, 148, 130)
-          l3  <- c( 3,  89, 123, 157)
-          l4  <- c( 4,  90, 109,  65)
-          l5  <- c( 5, 128, 128, 177)
-          l6  <- c( 6,  92, 190, 174)
-          l7  <- c( 7, 221, 125,  48)
-          l8  <- c( 8,  65,  92, 170)
-          l9  <- c( 9, 195,  82,  97)
-          l10 <- c(10,  92,  58, 106)
-          l11 <- c(11, 158, 190,  65)
+          l3  <- c( 3,  91, 122, 158)
+          l4  <- c( 4,  90, 108,  64)
+          l5  <- c( 5, 127, 129, 177)
+          l6  <- c( 6,  91, 191, 175)
+          l7  <- c( 7, 222, 125,  50)
+          l8  <- c( 8,  67,  92, 169)
+          l9  <- c( 9, 197,  81,  97)
+          l10 <- c(10,  92,  60, 107)
+          l11 <- c(11, 157, 191,  64)
           l12 <- c(12, 228, 162,  39)
-          l13 <- c(13,  34,  65, 147)
-          l14 <- c(14,  67, 150,  73)
-          l15 <- c(15, 178,  49,  58)
-          l16 <- c(16, 237, 199,  22)
-          l17 <- c(17, 191,  85, 151)
-          l18 <- c(18,   4, 136, 169)
+          l13 <- c(13,  35,  64, 148)
+          l14 <- c(14,  65, 150,  73)
+          l15 <- c(15, 176,  51,  58)
+          l16 <- c(16, 236, 200,  21)
+          l17 <- c(17, 191,  86, 153)
+          l18 <- c(18,   0, 137, 171)
           l19 <- c(19, 244, 246, 244)
-          l20 <- c(20, 198, 202, 202)
-          l21 <- c(21, 159, 163, 163)
+          l20 <- c(20, 198, 203, 203)
+          l21 <- c(21, 158, 163, 163)
           l22 <- c(22, 120, 121, 123)
-          l23 <- c(23,  81,  85,  86)
-          l24 <- c(24,  48,  49,  51)
+          l23 <- c(23,  79,  85,  86)
+          l24 <- c(24,  48,  50,  52)
 
           ColorCheckerRGB <- as.data.frame(
             rbind(
@@ -734,17 +761,17 @@ shinyServer(function(input, output) {
           imG <- dat$imG
           imB <- dat$imB
 
-          modelR <- lm(sR ~ imR + imG + imB + I(imR^2) + I(imG^2) + I(imB^2))
+          modelR <- lm(sR ~ imR + imG + imB + I(imR^2) + I(imG^2) + I(imB^2) + I(imR^3) + I(imG^3) + I(imB^3))
 
           i <- i + 1
           incProgress(1/n, detail = paste("Adjusting quadratic regression (Red)..."))
 
-          modelG <- lm(sG ~ imR + imG + imB + I(imR^2) + I(imG^2) + I(imB^2))
+          modelG <- lm(sG ~ imR + imG + imB + I(imR^2) + I(imG^2) + I(imB^2) + I(imR^3) + I(imG^3) + I(imB^3))
 
           i <- i + 1
           incProgress(1/n, detail = paste("Adjusting quadratic regression (Blue)..."))
 
-          modelB <- lm(sB ~ imR + imG + imB + I(imR^2) + I(imG^2) + I(imB^2))
+          modelB <- lm(sB ~ imR + imG + imB + I(imR^2) + I(imG^2) + I(imB^2) + I(imR^3) + I(imG^3) + I(imB^3))
 
           i <- i + 1
           incProgress(1/n, detail = paste("Adjusting quadratic regression (Green)..."))
