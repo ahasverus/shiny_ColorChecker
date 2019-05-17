@@ -4,9 +4,9 @@ library(raster)
 
 img_path <- "~/OneDrive/OneDrive - Fondation Biodiversité/MySpace/shiny_ColorChecker/data/"
 
-fls <- list.files(paste0(img_path, "test2"), pattern = "window\\.JPG$", full.names = TRUE)
+fls <- list.files(paste0(img_path, "test2"), pattern = "mire_window\\.JPG$", full.names = TRUE)
 
-z <- 4
+z <- 1
 
 img <- load.image(fls[z])
 
