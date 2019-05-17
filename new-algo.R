@@ -4,9 +4,9 @@ library(raster)
 
 img_path <- "~/OneDrive/OneDrive - Fondation Biodiversité/MySpace/shiny_ColorChecker/data/"
 
-fls <- list.files(paste0(img_path, "test2"), pattern = "_reflex[0-9].JPG$|_smart[0-9].jpg$", full.names = TRUE)
+fls <- list.files(paste0(img_path, "test2"), pattern = "window\\.JPG$", full.names = TRUE)
 
-z <- 1
+z <- 4
 
 img <- load.image(fls[z])
 
@@ -150,12 +150,18 @@ for (polynom in 1:2) {
     modelR <- lm(trueR ~ R + G + B, data = dat)
     modelG <- lm(trueG ~ R + G + B, data = dat)
     modelB <- lm(trueB ~ R + G + B, data = dat)
+    # modelR <- lm(trueR ~ R, data = dat)
+    # modelG <- lm(trueG ~ G, data = dat)
+    # modelB <- lm(trueB ~ B, data = dat)
   }
 
   if (polynom == 2) {
     modelR <- lm(trueR ~ R + G + B + I(R^2) + I(G^2) + I(B^2), data = dat)
     modelG <- lm(trueG ~ R + G + B + I(R^2) + I(G^2) + I(B^2), data = dat)
     modelB <- lm(trueB ~ R + G + B + I(R^2) + I(G^2) + I(B^2), data = dat)
+    # modelR <- lm(trueR ~ R + I(R^2), data = dat)
+    # modelG <- lm(trueG ~ G + I(G^2), data = dat)
+    # modelB <- lm(trueB ~ B + I(B^2), data = dat)
   }
 
   if (polynom == 3) {
