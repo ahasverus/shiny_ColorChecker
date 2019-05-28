@@ -8,6 +8,8 @@ fls <- list.files(paste0(img_path, "test2"), pattern = "mire_window\\.JPG$", ful
 
 z <- 1
 
+fac <- 0.65
+
 img <- load.image(fls[z])
 
 ColorCheckerRGB <- read.csv2(paste0(img_path, "test2/spectro_mires.csv"), stringsAsFactors = FALSE)
@@ -23,8 +25,6 @@ for (i in 2:4) {
 par(mfrow = c(1, 1))
 par(xaxs = "i", yaxs = "i", mar = rep(1, 4), family = "serif", bg = "black")
 plot(img, axes = FALSE, ann = FALSE, bty = "n")
-
-fac <- 0.1
 
 xy <- locator(4)
 xyDF <- data.frame(x = xy$x, y = xy$y)
